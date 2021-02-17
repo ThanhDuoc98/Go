@@ -1,0 +1,122 @@
+definitions:
+  controller.ErrResponse:
+    properties:
+      error:
+        type: string
+    type: object
+  model.Account:
+    properties:
+      balance:
+        type: integer
+      created_at:
+        type: string
+      currency:
+        type: string
+      id:
+        type: integer
+      owner:
+        type: string
+    type: object
+info:
+  contact:
+    email: tranthanhduoc10@gmail.com
+    name: Duoc Tran
+    url: http://www.swagger.io/support
+  description: Golang REST API.
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+  termsOfService: http://duoctran.io/terms/
+  title: Golang REST API
+  version: "1.0"
+paths:
+  /accounts:
+    get:
+      consumes:
+      - application/json
+      description: List accounts
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/model.Account'
+            type: array
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/controller.ErrResponse'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/controller.ErrResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/controller.ErrResponse'
+      summary: List accounts
+    post:
+      consumes:
+      - application/json
+      description: Create Account
+      parameters:
+      - description: New Account
+        in: body
+        name: account
+        required: true
+        schema:
+          $ref: '#/definitions/model.Account'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/model.Account'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/controller.ErrResponse'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/controller.ErrResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/controller.ErrResponse'
+      summary: Create Account
+  /accounts/:id:
+    get:
+      consumes:
+      - application/json
+      description: Get Account Information
+      parameters:
+      - description: Account ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/model.Account'
+        "401":
+          description: Unauthorized
+          schema:
+            $ref: '#/definitions/controller.ErrResponse'
+        "404":
+          description: Not Found
+          schema:
+            $ref: '#/definitions/controller.ErrResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/controller.ErrResponse'
+      summary: Get Account Information
+swagger: "2.0"
